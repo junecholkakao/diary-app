@@ -1,2 +1,54 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script>
+  import { diaries } from "$lib/store/store";
+  import Icon from "@iconify/svelte";
+  import addIcon from '$lib/assets/icon_add.svg'
+
+  // console.log($diaries)
+
+  const list_text_length=50
+</script>
+
+<main class="container">
+  {#each $diaries as diary}
+  <div class="diary">
+    <a href={`/read/${diary.id}`}>
+      <p class="content">
+        {diary.content.length > list_text_length 
+        ? diary.content.slice(0, list_text_length) + "..."
+        : diary.content
+        }
+      </p>
+    </a>
+    <div class="bottom-info">
+      <span class="date">{diary.date}</span>
+      <div class="btns">
+        <button class="btn" aria-label="edit">
+          <Icon icon="uil:pen" width="24" height="24" />
+        </button>
+        <button class="btn" aria-label="delete">
+          <Icon icon="ic:baseline-delete" width="24" height="24" style="color: #f80" />
+        </button>
+      </div>
+    </div>
+  </div>
+    
+  {/each}
+</main>
+<a href="/write" class="btn-write">
+  <img src={addIcon} alt="">
+</a>
+
+<style lang="scss">
+  .btn-write {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    img {
+      width: 64px;
+      height: 64px;
+    }
+  }
+
+</style>
