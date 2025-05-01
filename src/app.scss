@@ -65,3 +65,21 @@ main {
 		cursor: pointer;
 	}
 }
+
+textarea {
+	border: none;
+	width: 100%;
+	font-size: inherit;
+	padding:  0;
+	background: transparent;
+	outline: none;
+
+
+	font-family: inherit;
+
+	box-sizing: border-box;
+	border: 1px solid #eee;
+	line-height: 1.5;
+	overflow: hidden;
+
+}

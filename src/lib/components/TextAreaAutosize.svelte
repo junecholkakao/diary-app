@@ -20,7 +20,7 @@
 	.text-container {
 		position: relative;
 	}
-	
+
 	pre, textarea {
 		font-family: inherit;
 		padding: 0.5em;
@@ -37,7 +37,7 @@
 		height: 100%;
 		top: 0;
 		resize: none;
-    background: transparent;
+    background: var(--bg-light);
     outline: none;
 	}
 </style>

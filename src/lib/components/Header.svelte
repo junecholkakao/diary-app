@@ -1,10 +1,12 @@
 <script>
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
-	import { addDiary } from '$lib/store/store';
+	import { addDiary, updateDiary } from '$lib/store/store';
 
-
-	$: path = $page.url.pathname;
+	let path
+	$: {
+		path = $page.url.pathname;
+	}
 
   function doneHandler() {
     if (path.startsWith('/read')){
@@ -16,7 +18,8 @@
       goto('/')
     }
     else if (path.startsWith('/edit')){
-      // 수정
+			const id = path.split('/').pop()
+      updateDiary(id)
       goto('/')
     }
   }
@@ -26,7 +29,11 @@
 </script>
 
 <header>
-	<h1>Diary</h1>
+	<h1>{
+		(path.startsWith('/read')) ? '읽기' 
+		: (path.startsWith('/write')) ? '쓰기'
+		: (path.startsWith('/edit')) ? '수정하기'  
+		: 'Diary'}</h1>
 	{#if path !== '/'}
 		<button class="btn" on:click={doneHandler}>완료</button>
 	{/if}

@@ -2,36 +2,27 @@
 	import TextAreaAutosize from "$lib/components/TextAreaAutosize.svelte";
 	import { writing } from "$lib/store/store";
   import { formatDate } from "$lib/utils/formatDate";
+  import autosize from "svelte-autosize";
 
-
+  let textarea
   let val=''
 
   $: {
     $writing = val
+    autosize.update(textarea)
   }
 </script>
 
 <main>
   <div class="diary">
-    <TextAreaAutosize 
-    bind:value={val}  
-    minRows={4}
-    maxRows={40}
-    />
+    <textarea 
+      use:autosize
+      bind:this={textarea}
+      bind:value={val}  
+      placeholder="글쓰기를 시작하세요..."
+    ></textarea>
     <div class="bottom-info">
       <span class="date">{formatDate()}</span>
     </div>
   </div>
 </main>
-
-<style lang="scss">
-  // .textarea {
-  //   border: none;
-  //   width: 100%;
-  //   font-size: inherit;
-  //   padding: 0.5rem 0;
-  //   background: transparent;
-  //   outline: none;
-  // }
-
-</style>
