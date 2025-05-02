@@ -28,7 +28,7 @@
       </p>
     </a>
     <div class="bottom-info">
-      <span class="date">{formatDate(diary.created_At)}</span>
+      <span class="date">{formatDate(diary.created_at)}</span>
       <Btns diary_id={diary.id}/>
     </div>
   </div>

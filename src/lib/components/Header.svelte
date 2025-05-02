@@ -2,24 +2,35 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { addDiary, updateDiary } from '$lib/store/store';
+	import { toast } from 'svelte-sonner';
 
 	let path
 	$: {
 		path = $page.url.pathname;
 	}
 
-  function doneHandler() {
+  async function doneHandler() {
     if (path.startsWith('/read')){
       goto('/')
     }
     else if (path.startsWith('/write')){
       // 글쓰기
-      addDiary()
+      const success = await addDiary()
+			if(success) 
+				toast.success('글쓰기 성공')
+			else 
+				toast.error('글쓰기 실패')
+
       goto('/')
     }
     else if (path.startsWith('/edit')){
 			const id = path.split('/').pop()
-      updateDiary(id)
+      const success = await updateDiary(id)
+			if(success) 
+				toast.success('수정 성공')
+			else 
+				toast.error('수정 실패')
+			
       goto('/')
     }
   }

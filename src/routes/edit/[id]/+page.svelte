@@ -8,9 +8,14 @@
 	import Btns from "$lib/components/Btns.svelte";
   import autosize from 'svelte-autosize'
 
-  console.log($page)
-  const id = $page.params.id
-  const diary = $diaries.find(item=>item.id === Number(id))
+  // console.log($page)
+  // const id = $page.params.id
+  // const diary = $diaries.find(item=>item.id === Number(id))
+  
+  export let data
+  const diary = data.diary
+  console.log(diary)
+
   let val=diary.content
   console.log(val)
 
@@ -29,7 +34,7 @@
       bind:this={textarea}
     ></textarea>
     <div class="bottom-info">
-      <span class="date">{diary.date}</span>
+      <span class="date">{formatDate(diary.created_at)}</span>
       <Btns diary_id={diary.id} show_edit={false}/>
     </div>
   </div>
