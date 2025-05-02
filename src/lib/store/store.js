@@ -80,7 +80,24 @@ export const updateDiary = async (id) => {
   // }
 }
 
-export const deleteDiary = (id) => {
+export const deleteDiary = async (id) => {
   console.log("delete diary: ", id)
-  diaries.update(diaries => diaries.filter(item => item.id !== Number(id)))
+
+  const response = await fetch('/api', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({id})
+  })
+
+  console.log(response)
+  if (!response.ok) 
+    return false
+
+  const data = await response.json()
+  return data.success
+
+
+  // diaries.update(diaries => diaries.filter(item => item.id !== Number(id)))
 }

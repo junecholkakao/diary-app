@@ -17,8 +17,22 @@ export async function PUT({request}) {
   const data = await request.json()
   const {id, content} = data
   console.log(id, content)
-  
+
   const {error} = await supabase.from('diaries').update({content}).eq('id', id)
+
+  if (error) {
+    return json({success: false})
+  }
+
+  return json({success: true})
+}
+
+export async function DELETE({request}) {
+  const data = await request.json()
+  const {id} = data
+  console.log("Deleting... ", id)
+  
+  const {error} = await supabase.from('diaries').delete().eq('id', id)
 
   if (error) {
     return json({success: false})
